@@ -1,0 +1,119 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="DiscoRoboOfficial.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+    	<Grid.Background>
+    		<ImageBrush Stretch="Fill"/>
+    	</Grid.Background>
+        <toolkit:GestureService.GestureListener>
+            <toolkit:GestureListener Flick="GestureListener_Flick"/>
+        </toolkit:GestureService.GestureListener>
+        <Canvas x:Name="VideoCanvas" Margin="0" Visibility="Collapsed">
+            <Canvas.Background>
+                <VideoBrush x:Name="CameraView">
+                    <VideoBrush.RelativeTransform>
+                        <CompositeTransform CenterX="0.5" CenterY="0.5"  Rotation="90"/>
+                    </VideoBrush.RelativeTransform>
+                </VideoBrush>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas x:Name="ImageCanvas" Margin="0" Height="480">
+            <Canvas.Background>
+                <ImageBrush x:Name="ImageView" Stretch="Fill" ImageSource="/UIComponent\d1.png"/>
+            </Canvas.Background>
+        </Canvas>
+        <Rectangle  HorizontalAlignment="Left" Height="100" Margin="18,18,0,0" Stroke="Black" 
+                    VerticalAlignment="Top" Width="100" StrokeThickness="0" MouseLeftButtonDown="ShakeEnable_Click">
+            <Rectangle.Fill>
+                <ImageBrush x:Name="ShakeEnableButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_shake_press_1.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle  HorizontalAlignment="Right" Height="100" Margin="0,18,18,0" Stroke="Black" 
+    		VerticalAlignment="Top" Width="100" StrokeThickness="0" MouseLeftButtonDown="CameraEnable_Click">
+            <Rectangle.Fill>
+                <ImageBrush x:Name="CameraEnableButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_camera_nor_1.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Grid x:Name="ControlPanel" Width="360" Height="70" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle x:Name="SwitchModeButton" Height="70" Margin="0" Grid.Column="0"
+                   Stroke="Black" Width="70" MouseLeftButtonDown="ChangeMode_OnClick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="SwitchModeButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_switch_mode_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="ReplayButton" Height="70" Margin="0" Stroke="Black" Grid.Column="2" Width="70" 
+                       MouseLeftButtonDown="ReplayButton_OnClick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="ReplayButtonBackground"  Stretch="Fill" ImageSource="/UIComponent/ic_play_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="RecordButton" Height="70" Margin="0" Stroke="Black" Grid.Column="1" Width="70" 
+                       MouseLeftButtonDown="RecordButton_OnClick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="RecordButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_record_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="ChangeSpeedButton" Height="70" Margin="0" Stroke="Black" Grid.Column="3" Width="70" 
+                       MouseLeftButtonDown="ChangeSpeedButton_OnCllick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="ChangeSpeedButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_change_speed_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Grid>
+        <Popup x:Name="SavePopup" HorizontalAlignment="Left" Margin="30,250,0,0">
+            <Grid Background="{StaticResource PhoneChromeBrush}" Height="206" Width="420">
+                <toolkit:PhoneTextBox x:Name="SaveTextBox" Height="74" Margin="20,20,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="White"/>
+                <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
+                        Margin="20,114,0,0" VerticalAlignment="Top" Width="170" Click="CancelButton_Click"/>
+                <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Right" Height="72" 
+                        Margin="0,114,20,0" VerticalAlignment="Top" Width="170" Click="SaveButton_Click"/>
+            </Grid>
+        </Popup>
+        <Popup x:Name="LoadPopUp">
+            <Grid Background="{StaticResource PhoneChromeBrush}" Height="500" Margin="0,150,0,0" Width="480">
+                <ListBox Name="LoadList" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" 
+                         Height="398" VerticalAlignment="Top" SelectionMode="Single">                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="36" >
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu Name="ContextMenu" IsZoomEnabled="False">
+                                    <toolkit:MenuItem Name="Delete"  Header="Delete" Click="Delete_Click"/>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button x:Name="CancelLoadButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
+                        Margin="20,20,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelLoadButton_Click"/>
+                <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Right" Height="72" 
+                        Margin="0,20,20,0" VerticalAlignment="Bottom" Width="210" Click="LoadButton_Click"/>
+            </Grid>
+        </Popup>
+
+    </Grid>
+
+
+
+</phone:PhoneApplicationPage>
