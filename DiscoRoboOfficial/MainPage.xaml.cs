@@ -139,6 +139,13 @@ namespace DiscoRoboOfficial
                 e.Cancel = true;
                 return;
             }
+            if (NavigationService.CanGoBack)
+            {
+                while (NavigationService.RemoveBackEntry() != null)
+                {
+                    NavigationService.RemoveBackEntry();
+                }
+            }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -396,9 +403,9 @@ namespace DiscoRoboOfficial
 
             if (!UseAccelerometer)
             {
-                var norUri = new Uri(ShakeIconPress, UriKind.Relative);
-
-                ShakeEnableButtonBackground.ImageSource = new BitmapImage(norUri);
+                var pressUri = new Uri(ShakeIconNormal, UriKind.Relative);
+                ShakeEnableButtonBackground.ImageSource = new BitmapImage(pressUri);
+                
                 accelerometer = new Accelerometer
                                     {
                                         TimeBetweenUpdates = TimeSpan.FromMilliseconds(100)
@@ -411,8 +418,9 @@ namespace DiscoRoboOfficial
             }
             else
             {
-                var pressUri = new Uri(ShakeIconNormal, UriKind.Relative);
-                ShakeEnableButtonBackground.ImageSource = new BitmapImage(pressUri);
+                var norUri = new Uri(ShakeIconPress, UriKind.Relative);
+
+                ShakeEnableButtonBackground.ImageSource = new BitmapImage(norUri);
 #pragma warning disable 612,618
                 accelerometer.ReadingChanged -= Accelerometer_ReadingChanged;
 #pragma warning restore 612,618
@@ -704,7 +712,8 @@ namespace DiscoRoboOfficial
         private void ShowTutorialButton_OnClick(object sender, RoutedEventArgs e)
         {
             HelpPopUp.IsOpen = false;
-            MessageBox.Show("Coming soon....");
+            var uri = new Uri("/Tutorial/Tutorial1.xaml", UriKind.Relative);
+            NavigationService.Navigate(uri);
         }
 
         private void HelpButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
