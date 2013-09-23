@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{234669a4-e9b2-4838-ae71-b37ac6876db2}" Title="Disco Robo" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TOSY ROBOTICS JSC" Description="Tool to control Disco Robo by using  Windows Phone device.&#xD;&#xA;Support flick gesture and shake to remote." Publisher="TOSY ROBOTICS JSC">
+  <App xmlns="" ProductID="{234669a4-e9b2-4838-ae71-b37ac6876db2}" Title="Disco Robo" RuntimeType="Silverlight" Version="1.1.1.0" Genre="apps.normal" Author="TOSY ROBOTICS JSC" Description="IMPORTANT: You must have a Disco Robo, a dancing robot of Tosy Robotics JSC&#xD;&#xA;Tool to control Disco Robo by using  Windows Phone device.&#xD;&#xA;Support flick gesture and shake to remote." Publisher="TOSY ROBOTICS JSC">
     <IconPath IsRelative="true" IsResource="false">ic_launcher.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_MEDIALIB" />

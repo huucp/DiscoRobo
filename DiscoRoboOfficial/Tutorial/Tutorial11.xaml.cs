@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
-namespace DiscoRoboOfficial
+namespace DiscoRoboOfficial.Tutorial
 {
     public partial class Tutorial12 : PhoneApplicationPage
     {
@@ -19,7 +13,7 @@ namespace DiscoRoboOfficial
 
         private void PreviousButton_Click(object sender, RoutedEventArgs e)
         {
-            var uri = new Uri("/Tutorial/Tutorial11.xaml", UriKind.Relative);
+            var uri = new Uri("/Tutorial/Tutorial10.xaml", UriKind.Relative);
             NavigationService.Navigate(uri);
         }
 

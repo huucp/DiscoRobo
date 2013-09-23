@@ -40,9 +40,11 @@
 			<Image Height="60" Margin="5,0" Width="60" Source="/UIComponent/New/ic_change_speed_nor.png"/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="button "/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="to "/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="replay "/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="change "/>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="the "/>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="record"/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="speed "/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="of  "/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="48" Text="robot"/>
 		</toolkit:WrapPanel>
     	
                 
