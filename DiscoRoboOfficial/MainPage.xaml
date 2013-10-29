@@ -16,9 +16,9 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
-    	<Grid.Background>
-    		<ImageBrush Stretch="UniformToFill" ImageSource="/UIComponent/New/BG_controlscreen.png"/>
-    	</Grid.Background>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/UIComponent/New/BG_controlscreen.png"/>
+        </Grid.Background>
         <toolkit:GestureService.GestureListener>
             <toolkit:GestureListener Flick="GestureListener_Flick"/>
         </toolkit:GestureService.GestureListener>
@@ -48,10 +48,12 @@
                 <ImageBrush x:Name="CameraEnableButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_camera_nor.png"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Rectangle x:Name="HelpButton" HorizontalAlignment="Center" Height="96" Margin="0,18,0,0" MouseLeftButtonDown="HelpButton_MouseLeftButtonDown"  Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="75">
-        	<Rectangle.Fill>
-        		<ImageBrush Stretch="Fill" ImageSource="/UIComponent/New/ic_help_nor.png"/>
-        	</Rectangle.Fill>
+        <Rectangle x:Name="HelpButton" HorizontalAlignment="Center" Height="96" Margin="0,18,0,0" 
+                   MouseLeftButtonDown="HelpButton_MouseLeftButtonDown" MouseLeftButtonUp="HelpButton_OnMouseLeftButtonUp"
+                   Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="75">
+            <Rectangle.Fill>
+                <ImageBrush Stretch="Fill" ImageSource="/UIComponent/New/ic_help_nor.png"/>
+            </Rectangle.Fill>
         </Rectangle>
         <Grid x:Name="ControlPanel" Width="444" Height="70" VerticalAlignment="Bottom" Margin="0,0,0,20">
             <Grid.ColumnDefinitions>
@@ -59,26 +61,34 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Rectangle x:Name="SwitchModeButton" Height="70" Margin="0" Grid.Column="0"
-                   Stroke="Black" Width="91" MouseLeftButtonDown="ChangeMode_OnClick" StrokeThickness="0">
+                   Stroke="Black" Width="91" MouseLeftButtonDown="ChangeMode_OnClick" StrokeThickness="0"
+                       MouseLeftButtonUp="SwitchModeButton_OnMouseLeftButtonUp">
                 <Rectangle.Fill>
                     <ImageBrush x:Name="SwitchModeButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_switch_mode_nor.png"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle x:Name="ReplayButton" Height="70" Margin="0" Stroke="Black" Grid.Column="2" Width="91" 
-                       MouseLeftButtonDown="ReplayButton_OnClick" StrokeThickness="0">
-                <Rectangle.Fill>
-                    <ImageBrush x:Name="ReplayButtonBackground"  Stretch="Fill" ImageSource="/UIComponent/New/ic_play_nor.png"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle x:Name="RecordButton" Height="70" Margin="0" Stroke="Black" Grid.Column="1" Width="91" 
+            <Rectangle x:Name="RecordButton" Height="70" Margin="0" Grid.Column="1" Width="91" 
                        MouseLeftButtonDown="RecordButton_OnClick" StrokeThickness="0">
                 <Rectangle.Fill>
                     <ImageBrush x:Name="RecordButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_record_nor.png"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Rectangle x:Name="ChangeSpeedButton" Height="70" Margin="0" Stroke="Black" Grid.Column="3" Width="91" 
+            <Rectangle x:Name="ReplayButton" Height="70" Margin="0" Grid.Column="2" Width="91" 
+                       MouseLeftButtonDown="ReplayButton_OnClick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="ReplayButtonBackground"  Stretch="Fill" ImageSource="/UIComponent/New/ic_play_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="MusicPlayButton" Height="70" Margin="0" Grid.Column="3" Width="91"
+                       MouseLeftButtonDown="MusicPlayButton_OnClick" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="MusicPlayButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_browse_nor.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle x:Name="ChangeSpeedButton" Height="70" Margin="0" Grid.Column="4" Width="91" 
                        MouseLeftButtonDown="ChangeSpeedButton_OnCllick" StrokeThickness="0">
                 <Rectangle.Fill>
                     <ImageBrush x:Name="ChangeSpeedButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_change_speed_nor.png"/>
@@ -94,13 +104,17 @@
                         Margin="0,114,20,0" VerticalAlignment="Top" Width="170" Click="SaveButton_Click"/>
             </Grid>
         </Popup>
-        <Popup x:Name="LoadPopUp">
+        <Popup x:Name="LoadPopup">
             <Grid Background="{StaticResource PhoneChromeBrush}" Height="500" Margin="0,160,0,0" Width="480" Opacity="0.9">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="97*"/>
+                    <RowDefinition Height="28*"/>
+                </Grid.RowDefinitions>
                 <ListBox Name="LoadList" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Top" 
-                         Height="398" VerticalAlignment="Top" SelectionMode="Single">                    
+                         Height="400" VerticalAlignment="Top" SelectionMode="Single" Grid.RowSpan="2">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" FontSize="36" >
+                            <TextBlock Text="{Binding}" FontSize="32" Margin="10,10,10,0">
                             <toolkit:ContextMenuService.ContextMenu>
                                 <toolkit:ContextMenu Name="ContextMenu" IsZoomEnabled="False">
                                     <toolkit:MenuItem Name="Delete"  Header="Delete" Click="Delete_Click"/>
@@ -111,16 +125,16 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Button x:Name="CancelLoadButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
-                        Margin="20,20,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelLoadButton_Click"/>
+                        Margin="20,0,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelLoadButton_Click" Grid.Row="1"/>
                 <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Right" Height="72" 
-                        Margin="0,20,20,0" VerticalAlignment="Bottom" Width="210" Click="LoadButton_Click"/>
+                        Margin="0,0,20,0" VerticalAlignment="Bottom" Width="210" Click="LoadButton_Click" Grid.Row="1"/>
             </Grid>
         </Popup>
-        <Popup x:Name="HelpPopUp">
-        	<Grid Background="{StaticResource PhoneChromeBrush}" Height="500" Width="480" Opacity="0.9" Margin="0,160,0,0">
-        		<Button x:Name="CloseHelpButton" Content="Close" Click="CloseHelpButton_Click"  HorizontalAlignment="Right" Height="72" Margin="0,10,0,0" VerticalAlignment="Bottom" Width="240"/>
-        		<Button x:Name="ShowTutorialButton" Content="Show tutorial" Click="ShowTutorialButton_OnClick"  HorizontalAlignment="Left" Height="72" Margin="0" VerticalAlignment="Bottom" Width="240"/>
-        		<Grid Margin="0,0,0,80">
+        <Popup x:Name="HelpPopup">
+            <Grid Background="{StaticResource PhoneChromeBrush}" Height="500" Width="480" Opacity="0.9" Margin="0,160,0,0">
+                <Button x:Name="CloseHelpButton" Content="Close" Click="CloseHelpButton_Click"  HorizontalAlignment="Right" Height="72" Margin="0,10,0,0" VerticalAlignment="Bottom" Width="240"/>
+                <Button x:Name="ShowTutorialButton" Content="Show tutorial" Click="ShowTutorialButton_OnClick"  HorizontalAlignment="Left" Height="72" Margin="0" VerticalAlignment="Bottom" Width="240"/>
+                <Grid Margin="0,0,0,80">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="94"/>
                         <ColumnDefinition Width="1*"/>
@@ -133,16 +147,16 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="0" Source="/UIComponent/New/shake_ico.png"/>        			
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="1" Source="/UIComponent/New/camera_ico.png"/>        			
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="2" Source="/UIComponent/New/mode_ico.png"/>        			
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="3" Source="/UIComponent/New/record_ico.png"/>        			
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="4" Source="/UIComponent/New/play_ico.png"/>        			
-        			<Image Margin="5,0" Grid.Column="0" Grid.Row="5" Source="/UIComponent/New/speed_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="0" Source="/UIComponent/New/shake_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="1" Source="/UIComponent/New/camera_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="2" Source="/UIComponent/New/mode_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="3" Source="/UIComponent/New/record_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="4" Source="/UIComponent/New/play_ico.png"/>
+                    <Image Margin="5,0" Grid.Column="0" Grid.Row="5" Source="/UIComponent/New/speed_ico.png"/>
 
                     <TextBlock Height="26" Margin="5,0,0,0" TextWrapping="NoWrap" FontSize="21.333"
                                Text="Turn on/off shaking control" 
-                               VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" />
+                               VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" FontFamily="Segoe WP" />
                     <TextBlock Height="26" Margin="5,0,0,0" TextWrapping="NoWrap" FontSize="21.333"
                                Text="Switch camera mode" 
                                VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" />
@@ -159,7 +173,22 @@
                                Text="Change robot dance speed" 
                                VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" />
                 </Grid>
-        	</Grid>
+            </Grid>
+        </Popup>
+        <Popup x:Name="MusicPopup">
+            <Grid Background="{StaticResource PhoneChromeBrush}" Margin="0,160,0,150" Opacity="0.9" Width="480" Height="500">
+                <Button x:Name="CancelMusicLoadButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
+                        Margin="20,0,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelMusicLoadButton_OnClick"/>
+                <Button x:Name="PlayMusicButton" Content="Play" HorizontalAlignment="Right" Height="72" 
+                        Margin="0,0,20,0" VerticalAlignment="Bottom" Width="210" Click="PlayMusicButton_OnClick"/>
+                <ListBox x:Name="MusicList" Height="380" Width="480" SelectionMode="Single" VerticalAlignment="Top">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontSize="32" Margin="10,10,10,0"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
         </Popup>
 
     </Grid>

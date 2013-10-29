@@ -1,0 +1,68 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="DiscoRoboOfficial.TutorialPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="#FF362473">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="64"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+    	<Border x:Name="Title" BorderBrush="Black" BorderThickness="1" Margin="0">
+    		<Border.Background>
+    			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    				<GradientStop Color="#FF5B04AC"/>
+    				<GradientStop Color="#FFA23ABC" Offset="1"/>
+    			</LinearGradientBrush>
+    		</Border.Background>
+            <TextBlock Margin="0" TextWrapping="Wrap" Text="TUTORIAL" FontSize="40" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+    			<TextBlock.Foreground>
+    				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    					<GradientStop Color="#FFF0D8E5"/>
+    					<GradientStop Color="#FFDEB3BC" Offset="1"/>
+    				</LinearGradientBrush>
+    			</TextBlock.Foreground>                
+    		</TextBlock>            
+    	</Border>
+    	<Border x:Name="NextButton" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="75" 
+                Margin="55,0,0,47" Grid.Row="2" VerticalAlignment="Bottom" Width="153"
+                MouseLeftButtonDown="NextButton_MouseLeftButtonDown" MouseLeftButtonUp="NextButton_MouseLeftButtonUp">
+    		<Border.Background>
+    			<ImageBrush Stretch="Fill" ImageSource="/UIComponent/btn_bg_nor.png"/>
+    		</Border.Background>
+            <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="NEXT" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
+    	</Border>
+    	<Border x:Name="SkipButton" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Right" Height="75" Margin="0,0,55,47" Grid.Row="2" VerticalAlignment="Bottom" Width="153">
+    		<Border.Background>
+    			<ImageBrush Stretch="Fill" ImageSource="/UIComponent/btn_bg_nor.png"/>
+    		</Border.Background>
+            <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="SKIP" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
+    	</Border>
+    	<Border x:Name="Step1Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,32,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top"/>
+    	<Rectangle x:Name="Arrow1" HorizontalAlignment="Center" Height="33" Margin="0,188,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+    		<Rectangle.Fill>
+    			<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+    		</Rectangle.Fill>
+    	</Rectangle>
+    	<Border x:Name="Step2Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,223,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top"/>
+    	<Rectangle x:Name="Arrow2" HorizontalAlignment="Center" Height="33" Margin="226.5,379,226.5,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+    		<Rectangle.Fill>
+    			<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+    		</Rectangle.Fill>
+    	</Rectangle>
+    	<Border x:Name="Step3Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,414,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top"/>        
+    </Grid>
+
+</phone:PhoneApplicationPage>

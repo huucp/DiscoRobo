@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Microsoft.Devices;
@@ -14,11 +15,13 @@ using Microsoft.Devices.Sensors;
 using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace DiscoRoboOfficial
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        #region Variables
         private Accelerometer accelerometer;
         private PhotoCamera camera { get; set; }
 
@@ -26,17 +29,9 @@ namespace DiscoRoboOfficial
         private const string ShakeSound = "Audio/1200.wav";
         private const string BowSound = "Audio/1100.wav";
         private const string MoveFootSound = "Audio/1500.wav";
-        private const string ChangeLEDSound = "Audio/1000.wav";
+        // private const string ChangeLEDSound = "Audio/1000.wav"; // Rerve
         private const string ChangeSpeedSound = "Audio/800.wav";
 
-        //private const string D1Image = "/UIComponent/d1.png";
-        //private const string D2Image = "/UIComponent/d2.png";
-        //private const string D3Image = "/UIComponent/d3.png";
-        //private const string D4Image = "/UIComponent/d4.png";
-        //private const string D5Image = "/UIComponent/d5.png";
-        //private const string D6Image = "/UIComponent/d6.png";
-        //private const string D7Image = "/UIComponent/d7.png";
-        //private const string D8Image = "/UIComponent/d8.png";
         private const string D1Image = "/UIComponent/New/d1.png";
         private const string D2Image = "/UIComponent/New/d2.png";
         private const string D3Image = "/UIComponent/New/d3.png";
@@ -46,23 +41,18 @@ namespace DiscoRoboOfficial
         private const string D7Image = "/UIComponent/New/d7.png";
         private const string D8Image = "/UIComponent/New/d8.png";
 
-        //private const string ShakeIconPress = "/UIComponent/ic_shake_nor.png";
-        //private const string ShakeIconNormal = "/UIComponent/ic_shake_press_1.png";
         private const string ShakeIconPress = "/UIComponent/New/ic_shake_nor.png";
         private const string ShakeIconNormal = "/UIComponent/New/ic_shake_press.png";
 
-        //private const string CameraModeIcon = "/UIComponent/ic_camera_nor_1.png";
-        //private const string ImageModeIcon = "/UIComponent/ic_gesture_nor_1.png";
         private const string CameraModeIcon = "/UIComponent/New/ic_camera_press.png";
         private const string ImageModeIcon = "/UIComponent/New/ic_gesture_press.png";
 
-        //private const string StopIcon = "UIComponent/ic_stop_nor.png";
-        //private const string RecordIcon = "UIComponent/ic_record_nor.png";
-        //private const string ReplayIcon = "UIComponent/ic_play_nor.png";
-        private const string StopIcon = "UIComponent/New/ic_stop_nor.png";        
+        private const string StopIcon = "UIComponent/New/ic_stop_nor.png";
         private const string ReplayIcon = "UIComponent/New/ic_play_nor.png";
         private const string RecordIcon = "UIComponent/New/ic_record_nor.png";
         private const string StopRecordIcon = "UIComponent/New/ic_record_press.png";
+
+        private const string PlayMusicIcon = "/UIComponent/New/ic_browse_nor.png";
 
         private bool UseCamera = false;
         private bool UseAccelerometer = false;
@@ -73,13 +63,24 @@ namespace DiscoRoboOfficial
         private List<uint> TimePivots = new List<uint>(); // milliseconds
         private List<int> RobotMove = new List<int>(); // 1: head shake, 2: head bow, 3: move foot        
 
-        // Reply parameters
+        // Replay parameters
         private DispatcherTimer ReplayTimer;
         private DateTime ReplayPivot;
+        private double ReplayTiming = 0;
         private int ReplayMoveCount;
         private bool IsReplaying = false;
         private bool StopReplay = false;
         private const int TickInterval = 100;
+
+        // Play music?
+        private bool IsPlayingMusic = false;
+
+        // Shake parameters
+        private const double ShakeThresholdX = 0.8;
+        private const double ShakeThresholdZ = 0.6;
+        private const int ShakeDelay = 250;
+        private DateTime ShakeTimePivot;
+
 
         // Change speed parameters
         private bool HighSpeed = true;
@@ -91,6 +92,7 @@ namespace DiscoRoboOfficial
         {
             D1, D2, D3, D4, D5, D6, D7, D8
         }
+        #endregion
 
         // Constructor
         public MainPage()
@@ -117,14 +119,15 @@ namespace DiscoRoboOfficial
             }
             if (camera != null) camera.Dispose();
             ReplayTimer.Tick -= ReplayTimer_Tick;
+            if (MediaPlayer.State == MediaState.Playing) MediaPlayer.Pause();
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             //base.OnBackKeyPress(e);
-            if (LoadPopUp.IsOpen)
+            if (LoadPopup.IsOpen)
             {
-                LoadPopUp.IsOpen = false;
+                LoadPopup.IsOpen = false;
                 e.Cancel = true;
                 return;
             }
@@ -134,9 +137,15 @@ namespace DiscoRoboOfficial
                 e.Cancel = true;
                 return;
             }
-            if (HelpPopUp.IsOpen)
+            if (HelpPopup.IsOpen)
             {
-                HelpPopUp.IsOpen = false;
+                HelpPopup.IsOpen = false;
+                e.Cancel = true;
+                return;
+            }
+            if (MusicPopup.IsOpen)
+            {
+                MusicPopup.IsOpen = false;
                 e.Cancel = true;
                 return;
             }
@@ -165,18 +174,13 @@ namespace DiscoRoboOfficial
                 accelerometer.Start();
             }
             ReplayTimer.Tick += ReplayTimer_Tick;
+            if (MediaPlayer.State == MediaState.Paused) MediaPlayer.Resume();
         }
 
         private void Accelerometer_ReadingChanged(object sender, AccelerometerReadingEventArgs e)
         {
             Deployment.Current.Dispatcher.BeginInvoke(() => AccelerometerChanged(e));
         }
-
-        private const double ShakeThresholdX = 0.8;
-        private const double ShakeThresholdZ = 0.6;
-        private const int ShakeDelay = 250;
-        private DateTime ShakeTimePivot;
-
 
         private void AccelerometerChanged(AccelerometerReadingEventArgs e)
         {
@@ -199,7 +203,8 @@ namespace DiscoRoboOfficial
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
         {
-            if (UseAccelerometer || LoadPopUp.IsOpen || SavePopup.IsOpen || HelpPopUp.IsOpen) return;
+            if (UseAccelerometer || LoadPopup.IsOpen || SavePopup.IsOpen || HelpPopup.IsOpen
+                || MusicPopup.IsOpen) return;
             if (Math.Abs(e.HorizontalVelocity - 0) > 0.001 &&
                 e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
@@ -345,8 +350,8 @@ namespace DiscoRoboOfficial
         private void PlaySound(string path)
         {
             Stream stream = TitleContainer.OpenStream(path);
-            SoundEffect effect = SoundEffect.FromStream(stream);            
-            FrameworkDispatcher.Update();            
+            SoundEffect effect = SoundEffect.FromStream(stream);
+            FrameworkDispatcher.Update();
             effect.Play();
             stream.Close();
         }
@@ -396,6 +401,8 @@ namespace DiscoRoboOfficial
 
         private void ChangeMode_OnClick(object sender, EventArgs e)
         {
+            var uri = new Uri("/UIComponent/New/ic_switch_mode_press.png", UriKind.Relative);
+            SwitchModeButtonBackground.ImageSource = new BitmapImage(uri);
             PlaySound(ChangeModeSound);
         }
 
@@ -406,7 +413,7 @@ namespace DiscoRoboOfficial
             {
                 var pressUri = new Uri(ShakeIconNormal, UriKind.Relative);
                 ShakeEnableButtonBackground.ImageSource = new BitmapImage(pressUri);
-                
+
                 accelerometer = new Accelerometer
                                     {
                                         TimeBetweenUpdates = TimeSpan.FromMilliseconds(100)
@@ -501,7 +508,7 @@ namespace DiscoRoboOfficial
                         TimePivots[index] -= (first - 500);
                     }
                     SavePopup.IsOpen = true;
-                }                
+                }
                 var uri = new Uri(RecordIcon, UriKind.Relative);
                 RecordButtonBackground.ImageSource = new BitmapImage(uri);
             }
@@ -510,13 +517,11 @@ namespace DiscoRoboOfficial
 
         private void ReplayButton_OnClick(object sender, EventArgs e)
         {
-
-
             if (IsRecording) return;
             if (!IsReplaying)
             {
                 LoadList.ItemsSource = LoadRecordList();
-                LoadPopUp.IsOpen = true;
+                LoadPopup.IsOpen = true;
             }
             else
             {
@@ -524,7 +529,38 @@ namespace DiscoRoboOfficial
             }
         }
 
-        private double ReplayTiming = 0;
+        private void MusicPlayButton_OnClick(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsPlayingMusic)
+            {
+                MusicList.ItemsSource = LoadMusicList();
+                MusicPopup.IsOpen = true;
+            }
+            else
+            {
+                var uri = new Uri(PlayMusicIcon, UriKind.Relative);
+                MusicPlayButtonBackground.ImageSource = new BitmapImage(uri);
+                if (MediaPlayer.State != MediaState.Stopped) MediaPlayer.Stop();
+                IsPlayingMusic = false;
+            }
+        }
+
+        private void ChangeSpeedButton_OnCllick(object sender, MouseButtonEventArgs e)
+        {        
+            PlaySound(ChangeSpeedSound);
+            HighSpeed = !HighSpeed;
+            if (HighSpeed)
+            {
+                var uri = new Uri(HighSpeedIcon, UriKind.Relative);
+                ChangeSpeedButtonBackground.ImageSource = new BitmapImage(uri);
+            }
+            else
+            {
+                var uri = new Uri(LowSpeedIcon, UriKind.Relative);
+                ChangeSpeedButtonBackground.ImageSource = new BitmapImage(uri);
+            }
+        }
+
         private void ReplayTimer_Tick(object sender, EventArgs e)
         {
             if (Math.Abs(ReplayTiming - 0) < 0.01) ReplayTiming = (DateTime.Now - ReplayPivot).TotalMilliseconds;
@@ -537,8 +573,10 @@ namespace DiscoRoboOfficial
                     ReplayMoveCount = TimePivots.Count;
                     break;
                 }
-                if (ReplayTiming - time < TickInterval && ReplayTiming - time >= 0)
+                //if (ReplayTiming - time < TickInterval && ReplayTiming - time >= 0)
+                if (Math.Abs(ReplayTiming - time) <= TickInterval / 2)
                 {
+                    Debug.WriteLine(ReplayTiming);
                     switch (RobotMove[index])
                     {
                         case 1:
@@ -562,22 +600,6 @@ namespace DiscoRoboOfficial
                 ReplayTiming = 0;
                 var uri = new Uri(ReplayIcon, UriKind.Relative);
                 ReplayButtonBackground.ImageSource = new BitmapImage(uri);
-            }
-        }
-
-        private void ChangeSpeedButton_OnCllick(object sender, MouseButtonEventArgs e)
-        {
-            PlaySound(ChangeSpeedSound);
-            HighSpeed = !HighSpeed;
-            if (HighSpeed)
-            {
-                var uri = new Uri(HighSpeedIcon, UriKind.Relative);
-                ChangeSpeedButtonBackground.ImageSource = new BitmapImage(uri);
-            }
-            else
-            {
-                var uri = new Uri(LowSpeedIcon, UriKind.Relative);
-                ChangeSpeedButtonBackground.ImageSource = new BitmapImage(uri);
             }
         }
 
@@ -687,12 +709,12 @@ namespace DiscoRoboOfficial
 
         private void CancelLoadButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadPopUp.IsOpen = false;
+            LoadPopup.IsOpen = false;
         }
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadPopUp.IsOpen = false;
+            LoadPopup.IsOpen = false;
             if (LoadList.SelectedItem == null) return;
             string chosenRecord = LoadList.SelectedItem.ToString();
             LoadRecord(chosenRecord + ".txt");
@@ -707,19 +729,76 @@ namespace DiscoRoboOfficial
 
         private void CloseHelpButton_Click(object sender, RoutedEventArgs e)
         {
-            HelpPopUp.IsOpen = false;
+            HelpPopup.IsOpen = false;
         }
 
         private void ShowTutorialButton_OnClick(object sender, RoutedEventArgs e)
         {
-            HelpPopUp.IsOpen = false;
+            HelpPopup.IsOpen = false;
             var uri = new Uri("/Tutorial/Tutorial1.xaml", UriKind.Relative);
             NavigationService.Navigate(uri);
         }
 
         private void HelpButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            HelpPopUp.IsOpen = true;
+            var uri = new Uri("UIComponent/New/ic_help_press.png", UriKind.Relative);
+            HelpButton.Fill = new ImageBrush()
+            {
+                ImageSource = new BitmapImage(uri)
+            };
+            HelpPopup.IsOpen = true;
         }
+
+        private void CancelMusicLoadButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MusicPopup.IsOpen = false;
+        }
+
+        private void PlayMusicButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MusicPopup.IsOpen = false;
+            if (MusicList.SelectedItem == null) return;
+            string chosenMusic = MusicList.SelectedItem.ToString();
+            using (var library = new MediaLibrary())
+            {
+                foreach (var song in library.Songs)
+                {
+                    if (song.Name == chosenMusic)
+                    {
+                        FrameworkDispatcher.Update();
+                        MediaPlayer.Play(song);
+                        var uri = new Uri(StopIcon, UriKind.Relative);
+                        MusicPlayButtonBackground.ImageSource = new BitmapImage(uri);
+                        IsPlayingMusic = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private List<string> LoadMusicList()
+        {
+            var listSong = new List<string>();
+            using (var library = new MediaLibrary())
+            {
+                listSong.AddRange(library.Songs.Select(song => song.Name));
+            }
+            return listSong;
+        }
+
+        private void SwitchModeButton_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var uri = new Uri("/UIComponent/New/ic_switch_mode_nor.png", UriKind.Relative);
+            SwitchModeButtonBackground.ImageSource= new BitmapImage(uri);
+        }
+
+        private void HelpButton_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var uri = new Uri("UIComponent/New/ic_help_nor.png", UriKind.Relative);
+            HelpButton.Fill = new ImageBrush()
+                                  {
+                                      ImageSource = new BitmapImage(uri)
+                                  };
+        }       
     }
 }
