@@ -6,12 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    x:Class="DiscoRoboOfficial.TutorialPage"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:Anno="http://schemas.microsoft.com/expression/blend/extensions/annotations/2008"
+    x:Class="DiscoRoboOfficial.HelpPage"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
+    mc:Ignorable="d Anno"
     shell:SystemTray.IsVisible="False">
 	<phone:PhoneApplicationPage.Resources>
 		<Style x:Key="ExpanderViewStyle1" TargetType="toolkit:ExpanderView">
@@ -130,13 +128,20 @@
 			</Setter>
 		</Style>
 	</phone:PhoneApplicationPage.Resources>
-
-    <!--LayoutRoot is the root grid where all page content is placed-->
+	<phone:PhoneApplicationPage.FontFamily>
+		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
+	</phone:PhoneApplicationPage.FontFamily>
+	<phone:PhoneApplicationPage.FontSize>
+		<StaticResource ResourceKey="PhoneFontSizeNormal"/>
+	</phone:PhoneApplicationPage.FontSize>
+	<phone:PhoneApplicationPage.Foreground>
+		<StaticResource ResourceKey="PhoneForegroundBrush"/>
+	</phone:PhoneApplicationPage.Foreground>
 	<Grid x:Name="LayoutRoot" Background="#FF362473">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="64"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="150"/>
+			<RowDefinition Height="130"/>
 		</Grid.RowDefinitions>
 		<Border x:Name="Title" BorderBrush="Black" BorderThickness="1" Margin="0">
 			<Border.Background>
@@ -145,7 +150,7 @@
 					<GradientStop Color="#FFA23ABC" Offset="1"/>
 				</LinearGradientBrush>
 			</Border.Background>
-			<TextBlock Margin="0" TextWrapping="Wrap" Text="TUTORIAL" FontSize="40" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<TextBlock Margin="0" TextWrapping="Wrap" Text="HELP" FontSize="40" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<TextBlock.Foreground>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 						<GradientStop Color="#FFF0D8E5"/>
@@ -154,65 +159,64 @@
 				</TextBlock.Foreground>                
 			</TextBlock>            
 		</Border>
-		<Border x:Name="NextButton" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="75" 
-			Margin="55,0,0,47" Grid.Row="2" VerticalAlignment="Bottom" Width="153"
-			MouseLeftButtonDown="NextButton_OnMouseLeftButtonDown" MouseLeftButtonUp="NextButton_OnMouseLeftButtonUp">
+		<Border x:Name="CloseButton" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Center" Height="75" 
+			Margin="0" Grid.Row="2" VerticalAlignment="Center" Width="153"
+			MouseLeftButtonDown="CloseButton_OnMouseLeftButtonDown" MouseLeftButtonUp="CloseButton_OnMouseLeftButtonUp">
 			<Border.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/btn_bg_nor.png"/>
 			</Border.Background>
-			<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="NEXT" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
+			<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="CLOSE" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
 		</Border>
-		<Border x:Name="SkipButton" BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Right" 
-			Height="75" Margin="0,0,55,47" Grid.Row="2" VerticalAlignment="Bottom" Width="153"
-			MouseLeftButtonDown="SkipButton_OnMouseLeftButtonDown" MouseLeftButtonUp="SkipButton_OnMouseLeftButtonUp">
-			<Border.Background>
-				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/btn_bg_nor.png"/>
-			</Border.Background>
-			<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="SKIP" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
-		</Border>
-		<Border x:Name="Step1Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,32,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 1:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press DiscoRobo’s belly button to activate it" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>                
-			</Grid>
-		</Border>
-		<Rectangle x:Name="Arrow1" HorizontalAlignment="Center" Height="33" Margin="0,188,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
-			<Rectangle.Fill>
-				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Border x:Name="Step2Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,223,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 2:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press this button until both robot's hands light up" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>
-            </Grid>
-		</Border>
-		<Rectangle x:Name="Arrow2" HorizontalAlignment="Center" Height="33" Margin="226.5,379,226.5,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
-			<Rectangle.Fill>
-				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Border x:Name="Step3Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,414,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 3:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Swipe / shake to control DISCOROBO" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>
-			</Grid>
-		</Border>        
+		<Grid x:Name="ContentGrid" Margin="0" Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="4*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="1" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="2" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="3" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="4" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="5" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,8" Grid.Row="6" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Ellipse HorizontalAlignment="Left" Margin="18,8,0,7" Grid.Row="7" Stroke="Black" Fill="#FF493392" StrokeThickness="0" Height="64" Width="64"/>
+			<Image Margin="21,19,0,0" Grid.Row="1" Source="/UIComponent/New/shake_ico.png" Stretch="Fill" VerticalAlignment="Top" Width="57" Height="48" HorizontalAlignment="Left"/>
+			<Image Margin="22,18,0,0" Grid.Row="2" Source="/UIComponent/New/camera_ico.png" Stretch="Fill" HorizontalAlignment="Left" Width="57" VerticalAlignment="Top" Height="48"/>
+			<Image Margin="22,16,0,0" Grid.Row="3" Source="/UIComponent/New/mode_ico.png" Stretch="Fill" HorizontalAlignment="Left" Width="57" VerticalAlignment="Top" Height="48"/>
+			<Image Margin="21,17,0,0" Grid.Row="4" Source="/UIComponent/New/record_ico.png" Stretch="Fill" Height="48" VerticalAlignment="Top" HorizontalAlignment="Left" Width="57"/>
+			<Image Margin="25,16,0,0" Grid.Row="5" Source="/UIComponent/New/play_ico.png" Stretch="Fill" HorizontalAlignment="Left" Width="57" Height="48" VerticalAlignment="Top"/>
+			<Image Margin="21,15,0,0" Grid.Row="6" Source="/UIComponent/New/camera_ico.png" Stretch="Fill" HorizontalAlignment="Left" Width="57" Height="48" VerticalAlignment="Top"/>
+			<Image Margin="21,15,0,0" Grid.Row="7" Source="/UIComponent/New/speed_ico.png" Stretch="Fill" HorizontalAlignment="Left" Width="57" Height="48" VerticalAlignment="Top"/>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Shake to control DISCOROBO" Foreground="#FFFF00D8" FontSize="21.333" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Swipe across the DISCOROBO image captured by the phone camera to control DISCOROBO" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="21.333" VerticalAlignment="Center"/>
+			<!--<TextBlock Grid.Column="1" Margin="10,21.2,0,20.8" Grid.Row="3" TextWrapping="Wrap" Text="Change mode" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="26.667"/>-->
+            <toolkit:ExpanderView Grid.Column="1" Margin="10,26,0,0" Grid.Row="3" 
+                                  Style="{StaticResource ExpanderViewStyle1}" VerticalAlignment="Top" 
+                                  Header="Change DISCOROBO's operation mode" Foreground="#FFFF00D8" FontSize="21.333" Background="#FF362473">
+                <toolkit:ExpanderView.Items>
+                    <TextBlock FontSize="21.333" Text="Change DISCOROBO's operation mode" TextWrapping="Wrap"/>
+                    <TextBlock FontSize="21.333" Text="Default mode - No light in DISCOROBO's hands: DISCOROBO will dance to the beats"
+                               TextWrapping="Wrap"/>
+                    <TextBlock FontSize="21.333" Text="Mode 2 - DISCOROBO's hands light up: Swipe / shake to control DISCOROBO"
+                               TextWrapping="Wrap"/>
+                    <TextBlock FontSize="21.333" Text="Mode 3 – DISCOROBO's hands flash continuously: Continuous movement with a single swipe / shake"
+                               TextWrapping="Wrap"/>                    
+                </toolkit:ExpanderView.Items>
+            </toolkit:ExpanderView>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="4" TextWrapping="Wrap" Text="Start / Stop recording your dance session" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="21.333" VerticalAlignment="Center"/>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="5" TextWrapping="Wrap" Text="Select a recorded dance session to replay" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="21.333" VerticalAlignment="Center"/>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="6" TextWrapping="Wrap" Text="Select background music" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="21.333" VerticalAlignment="Center"/>
+			<TextBlock Grid.Column="1" Margin="10,0,0,0" Grid.Row="7" TextWrapping="Wrap" Text="Toggle Normal / Slow dance speed" HorizontalAlignment="Left" Foreground="#FFFF00D8" FontSize="21.333" VerticalAlignment="Center"/>
+			
+		</Grid>        
 	</Grid>
-
 </phone:PhoneApplicationPage>

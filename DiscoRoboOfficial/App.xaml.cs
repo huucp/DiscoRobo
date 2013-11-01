@@ -56,13 +56,24 @@ namespace DiscoRoboOfficial
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
-
         }
+
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            bool firstRun;
+            if (AppSettings.TryGetSetting("FirstRun", out firstRun))
+            {
+                ((App)Current).RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+            else
+            {
+                AppSettings.StoreSetting("FirstRun", true);
+                ((App)Current).RootFrame.Navigate(new Uri("/TutorialPage.xaml", UriKind.Relative));
+            }
+
         }
 
         // Code to execute when the application is activated (brought to foreground)

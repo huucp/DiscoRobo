@@ -99,9 +99,9 @@
             <Grid Background="{StaticResource PhoneChromeBrush}" Height="206" Width="420" Opacity="0.9">
                 <toolkit:PhoneTextBox x:Name="SaveTextBox" Height="74" Margin="20,20,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Background="White"/>
                 <Button x:Name="CancelButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
-                        Margin="20,114,0,0" VerticalAlignment="Top" Width="170" Click="CancelButton_Click"/>
+                        Margin="20,114,0,0" VerticalAlignment="Top" Width="170" Click="CancelButton_OnClick"/>
                 <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Right" Height="72" 
-                        Margin="0,114,20,0" VerticalAlignment="Top" Width="170" Click="SaveButton_Click"/>
+                        Margin="0,114,20,0" VerticalAlignment="Top" Width="170" Click="SaveButton_OnClick"/>
             </Grid>
         </Popup>
         <Popup x:Name="LoadPopup">
@@ -117,7 +117,7 @@
                             <TextBlock Text="{Binding}" FontSize="32" Margin="10,10,10,0">
                             <toolkit:ContextMenuService.ContextMenu>
                                 <toolkit:ContextMenu Name="ContextMenu" IsZoomEnabled="False">
-                                    <toolkit:MenuItem Name="Delete"  Header="Delete" Click="Delete_Click"/>
+                                    <toolkit:MenuItem Name="Delete"  Header="Delete" Click="Delete_OnClick"/>
                                 </toolkit:ContextMenu>
                             </toolkit:ContextMenuService.ContextMenu>
                             </TextBlock>
@@ -125,14 +125,14 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Button x:Name="CancelLoadButton" Content="Cancel" HorizontalAlignment="Left" Height="72" 
-                        Margin="20,0,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelLoadButton_Click" Grid.Row="1"/>
+                        Margin="20,0,0,0" VerticalAlignment="Bottom" Width="210" Click="CancelLoadButton_OnClick" Grid.Row="1"/>
                 <Button x:Name="LoadButton" Content="Load" HorizontalAlignment="Right" Height="72" 
-                        Margin="0,0,20,0" VerticalAlignment="Bottom" Width="210" Click="LoadButton_Click" Grid.Row="1"/>
+                        Margin="0,0,20,0" VerticalAlignment="Bottom" Width="210" Click="LoadButton_OnClick" Grid.Row="1"/>
             </Grid>
         </Popup>
         <Popup x:Name="HelpPopup">
             <Grid Background="{StaticResource PhoneChromeBrush}" Height="500" Width="480" Opacity="0.9" Margin="0,160,0,0">
-                <Button x:Name="CloseHelpButton" Content="Close" Click="CloseHelpButton_Click"  HorizontalAlignment="Right" Height="72" Margin="0,10,0,0" VerticalAlignment="Bottom" Width="240"/>
+                <Button x:Name="CloseHelpButton" Content="Close" Click="CloseHelpButton_OnClick"  HorizontalAlignment="Right" Height="72" Margin="0,10,0,0" VerticalAlignment="Bottom" Width="240"/>
                 <Button x:Name="ShowTutorialButton" Content="Show tutorial" Click="ShowTutorialButton_OnClick"  HorizontalAlignment="Left" Height="72" Margin="0" VerticalAlignment="Bottom" Width="240"/>
                 <Grid Margin="0,0,0,80">
                     <Grid.ColumnDefinitions>

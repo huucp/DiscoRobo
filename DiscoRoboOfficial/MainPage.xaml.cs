@@ -666,12 +666,12 @@ namespace DiscoRoboOfficial
             }
         }
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             SavePopup.IsOpen = false;
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
             var filename = SaveTextBox.Text;
             if (string.IsNullOrWhiteSpace(filename))
@@ -686,7 +686,7 @@ namespace DiscoRoboOfficial
             }
         }
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
         {
             var menuItem = sender as MenuItem;
             if (menuItem != null)
@@ -707,12 +707,12 @@ namespace DiscoRoboOfficial
         }
 
 
-        private void CancelLoadButton_Click(object sender, RoutedEventArgs e)
+        private void CancelLoadButton_OnClick(object sender, RoutedEventArgs e)
         {
             LoadPopup.IsOpen = false;
         }
 
-        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        private void LoadButton_OnClick(object sender, RoutedEventArgs e)
         {
             LoadPopup.IsOpen = false;
             if (LoadList.SelectedItem == null) return;
@@ -727,7 +727,7 @@ namespace DiscoRoboOfficial
             ReplayButtonBackground.ImageSource = new BitmapImage(uri);
         }
 
-        private void CloseHelpButton_Click(object sender, RoutedEventArgs e)
+        private void CloseHelpButton_OnClick(object sender, RoutedEventArgs e)
         {
             HelpPopup.IsOpen = false;
         }
@@ -746,7 +746,9 @@ namespace DiscoRoboOfficial
             {
                 ImageSource = new BitmapImage(uri)
             };
-            HelpPopup.IsOpen = true;
+            //HelpPopup.IsOpen = true;
+            var uriPage = new Uri("/TutorialPage.xaml", UriKind.Relative);
+            NavigationService.Navigate(uriPage);
         }
 
         private void CancelMusicLoadButton_OnClick(object sender, RoutedEventArgs e)
