@@ -41,7 +41,7 @@ namespace DiscoRoboOfficial
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -63,16 +63,20 @@ namespace DiscoRoboOfficial
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            bool firstRun;
-            if (AppSettings.TryGetSetting("FirstRun", out firstRun))
+
+            bool showAgain;
+            if (AppSettings.TryGetSetting("ShowAgain", out showAgain))
             {
-                ((App)Current).RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                if (!showAgain)
+                {
+                    ((App)Current).RootFrame.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                    return;
+                }
             }
-            else
-            {
-                AppSettings.StoreSetting("FirstRun", true);
-                ((App)Current).RootFrame.Navigate(new Uri("/TutorialPage.xaml", UriKind.Relative));
-            }
+            // this is the first run of the application            
+            AppSettings.StoreSetting("ShowAgain", true);
+            ((App)Current).RootFrame.Navigate(new Uri("/TutorialPage.xaml", UriKind.Relative));
+
 
         }
 

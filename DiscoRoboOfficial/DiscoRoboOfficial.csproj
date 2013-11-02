@@ -220,6 +220,8 @@
     <Content Include="UIComponent\btn_bg_nor.png" />
     <Content Include="UIComponent\btn_bg_press.png" />
     <Content Include="UIComponent\down_arrow.png" />
+    <Content Include="UIComponent\ic_load_music_nor.png" />
+    <Content Include="UIComponent\ic_turn_off.png" />
     <Content Include="UIComponent\New\BG_controlscreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

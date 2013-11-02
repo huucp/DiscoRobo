@@ -18,6 +18,31 @@ namespace DiscoRoboOfficial
         public HelpPage()
         {
             InitializeComponent();
+            
+            ChangeModeExpander.Expanded += ChangeModeExpanderOnExpanded;
+            ChangeModeExpander.Collapsed += ChangeModeExpanderOnCollapsed;
+
+            bool showAgain;
+            if (AppSettings.TryGetSetting("ShowAgain",out showAgain))
+            {
+                ShowAgainCheckBox.IsChecked = !showAgain;
+            }
+            else
+            {
+                ShowAgainCheckBox.IsChecked = false;
+            }
+        }
+
+        private void ChangeModeExpanderOnCollapsed(object sender, RoutedEventArgs e)
+        {
+            ChangeModeGrid.Height = 100;
+            ChangeModeExpander.Height = 60;
+        }
+
+        private void ChangeModeExpanderOnExpanded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ChangeModeGrid.Height = 480;
+            ChangeModeExpander.Height = 440;
         }
 
         private void CloseButton_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -38,6 +63,16 @@ namespace DiscoRoboOfficial
             {
                 ImageSource = new BitmapImage(uriImage)
             };
+        }
+
+        private void ShowAgainCheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.StoreSetting("ShowAgain",false);
+        }
+
+        private void ShowAgainCheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            AppSettings.StoreSetting("ShowAgain", true);
         }
     }
 }

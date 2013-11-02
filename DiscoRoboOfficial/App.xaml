@@ -7,6 +7,7 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <SolidColorBrush x:Key="HelpTextColor" Color="#FFF3C3FF"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

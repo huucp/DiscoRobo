@@ -85,7 +85,7 @@
             <Rectangle x:Name="MusicPlayButton" Height="70" Margin="0" Grid.Column="3" Width="91"
                        MouseLeftButtonDown="MusicPlayButton_OnClick" StrokeThickness="0">
                 <Rectangle.Fill>
-                    <ImageBrush x:Name="MusicPlayButtonBackground" Stretch="Fill" ImageSource="/UIComponent/New/ic_browse_nor.png"/>
+                    <ImageBrush x:Name="MusicPlayButtonBackground" Stretch="Fill" ImageSource="/UIComponent/ic_load_music_nor.png"/>
                 </Rectangle.Fill>
             </Rectangle>
             <Rectangle x:Name="ChangeSpeedButton" Height="70" Margin="0" Grid.Column="4" Width="91" 

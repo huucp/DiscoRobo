@@ -546,7 +546,7 @@ namespace DiscoRoboOfficial
         }
 
         private void ChangeSpeedButton_OnCllick(object sender, MouseButtonEventArgs e)
-        {        
+        {
             PlaySound(ChangeSpeedSound);
             HighSpeed = !HighSpeed;
             if (HighSpeed)
@@ -603,14 +603,19 @@ namespace DiscoRoboOfficial
             }
         }
 
-        private void SaveRecord(string SaveFileName)
+        private void SaveRecord(string filename)
         {
+            var saveFileName = "Record\\" + filename;
             using (IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
             {
-                if (myIsolatedStorage.FileExists(SaveFileName)) myIsolatedStorage.DeleteFile(SaveFileName);
+                if (myIsolatedStorage.FileExists(saveFileName)) myIsolatedStorage.DeleteFile(saveFileName);
+                if (!myIsolatedStorage.DirectoryExists("Record"))
+                {
+                    myIsolatedStorage.CreateDirectory("Record");
+                }
                 using (
                     var writeFile =
-                        new StreamWriter(new IsolatedStorageFileStream(SaveFileName, FileMode.Create, FileAccess.Write,
+                        new StreamWriter(new IsolatedStorageFileStream(saveFileName, FileMode.Create, FileAccess.Write,
                                                                        myIsolatedStorage)))
                 {
                     for (int i = 0; i < TimePivots.Count; i++)
@@ -626,8 +631,12 @@ namespace DiscoRoboOfficial
         private List<string> LoadRecordList()
         {
             var isoFile = IsolatedStorageFile.GetUserStoreForApplication();
-            var list = isoFile.GetFileNames();
             var storeList = new List<string>();
+            if (!isoFile.DirectoryExists("Record"))
+            {
+                return storeList;
+            }
+            var list = isoFile.GetFileNames("./Record/*.*");
             foreach (var file in list)
             {
                 var fileWithoutExtension = Path.GetFileNameWithoutExtension(file);
@@ -636,13 +645,14 @@ namespace DiscoRoboOfficial
             return storeList;
         }
 
-        private void LoadRecord(string SaveFileName)
+        private void LoadRecord(string filename)
         {
             TimePivots.Clear();
             RobotMove.Clear();
+            var saveFileName = "Record\\" + filename;
             IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication();
-            if (!myIsolatedStorage.FileExists(SaveFileName)) return;
-            IsolatedStorageFileStream fileStream = myIsolatedStorage.OpenFile(SaveFileName, FileMode.Open, FileAccess.Read);
+            if (!myIsolatedStorage.FileExists(saveFileName)) return;
+            IsolatedStorageFileStream fileStream = myIsolatedStorage.OpenFile(saveFileName, FileMode.Open, FileAccess.Read);
             using (var reader = new StreamReader(fileStream))
             {
                 while (!reader.EndOfStream)
@@ -791,7 +801,7 @@ namespace DiscoRoboOfficial
         private void SwitchModeButton_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var uri = new Uri("/UIComponent/New/ic_switch_mode_nor.png", UriKind.Relative);
-            SwitchModeButtonBackground.ImageSource= new BitmapImage(uri);
+            SwitchModeButtonBackground.ImageSource = new BitmapImage(uri);
         }
 
         private void HelpButton_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -801,6 +811,6 @@ namespace DiscoRoboOfficial
                                   {
                                       ImageSource = new BitmapImage(uri)
                                   };
-        }       
+        }
     }
 }

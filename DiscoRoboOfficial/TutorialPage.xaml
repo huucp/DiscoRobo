@@ -128,7 +128,7 @@
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
-		</Style>
+		</Style>        
 	</phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -177,8 +177,9 @@
 					<ColumnDefinition Width="2*"/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 1:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press DiscoRobo’s belly button to activate it" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>                
+				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 1:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press DiscoRobo’s belly button to activate it" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+				<Image Grid.Column="2" Margin="0" Source="/UIComponent/ic_turn_off.png" Stretch="Fill" Width="83" Height="115"/>                
 			</Grid>
 		</Border>
 		<Rectangle x:Name="Arrow1" HorizontalAlignment="Center" Height="33" Margin="0,188,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
@@ -193,8 +194,9 @@
 					<ColumnDefinition Width="2*"/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 2:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press this button until both robot's hands light up" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>
+				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 2:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press this button until both robot's hands light up" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+				<Image Grid.Column="2" Margin="0" Source="/UIComponent/New/ic_switch_mode_nor.png" Stretch="Fill" Width="77" Height="59" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
 		</Border>
 		<Rectangle x:Name="Arrow2" HorizontalAlignment="Center" Height="33" Margin="226.5,379,226.5,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
@@ -206,11 +208,10 @@
 			<Grid Margin="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
+					<ColumnDefinition Width="3*"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 3:" Foreground="#FFFF00D8" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Swipe / shake to control DISCOROBO" VerticalAlignment="Top" Foreground="#FFFF00D8" FontSize="25.333"/>
+				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 3:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Swipe / shake to control DISCOROBO" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
 			</Grid>
 		</Border>        
 	</Grid>
