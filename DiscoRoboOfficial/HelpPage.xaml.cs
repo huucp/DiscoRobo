@@ -36,13 +36,17 @@ namespace DiscoRoboOfficial
         private void ChangeModeExpanderOnCollapsed(object sender, RoutedEventArgs e)
         {
             ChangeModeGrid.Height = 100;
-            ChangeModeExpander.Height = 60;
+            ChangeModeExpander.Height = 73;
+            var transform = new CompositeTransform {Rotation = -90};
+            IndicatorImage.RenderTransform = transform;
         }
 
         private void ChangeModeExpanderOnExpanded(object sender, RoutedEventArgs routedEventArgs)
         {
-            ChangeModeGrid.Height = 480;
-            ChangeModeExpander.Height = 440;
+            ChangeModeGrid.Height = 530;
+            ChangeModeExpander.Height = 530;
+            var transform = new CompositeTransform { Rotation = 0 };
+            IndicatorImage.RenderTransform = transform;
         }
 
         private void CloseButton_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -73,6 +77,20 @@ namespace DiscoRoboOfficial
         private void ShowAgainCheckBox_OnUnchecked(object sender, RoutedEventArgs e)
         {
             AppSettings.StoreSetting("ShowAgain", true);
+        }
+
+        private void IndicatorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!ChangeModeExpander.IsExpanded)
+            {
+                ChangeModeExpanderOnExpanded(null, null);
+                ChangeModeExpander.IsExpanded = true;
+            }
+            else
+            {
+                ChangeModeExpanderOnCollapsed(null,null);
+                ChangeModeExpander.IsExpanded = false;
+            }
         }
     }
 }

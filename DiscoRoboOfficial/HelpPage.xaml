@@ -109,7 +109,9 @@
 										<RowDefinition Height="Auto"/>
 										<RowDefinition Height="Auto"/>
 									</Grid.RowDefinitions>
-									<ContentControl x:Name="Header" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0"/>
+									<TextBlock x:Name="Header" Grid.ColumnSpan="2" Text="{TemplateBinding Header}" Grid.Column="0" HorizontalAlignment="Stretch" Grid.Row="0"
+                                               TextWrapping="Wrap"/>
+                                    <!--<ContentControl x:Name="Header" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0"/>-->
 									<ContentControl x:Name="Expander" ContentTemplate="{TemplateBinding ExpanderTemplate}" Content="{TemplateBinding Expander}" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0" Grid.Row="1"/>
 									<Grid x:Name="ExpanderPanel" Background="Transparent" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
 								</Grid>
@@ -345,11 +347,12 @@
 						<Line Stretch="Fill" StrokeThickness="3" X1="0" X2="1" Y1="0" Height="1" Fill="Black" Stroke="Black" Opacity="0.9"/>
 						<Grid x:Name="ChangeModeGrid" Height="100" Margin="0" VerticalAlignment="Top">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition/>
+                                <ColumnDefinition Width="1*"/>
 								<ColumnDefinition Width="4*"/>
 							</Grid.ColumnDefinitions>
 							<toolkit:ExpanderView x:Name="ChangeModeExpander" Header="Change DISCOROBO's operation mode" 
-								Foreground="{StaticResource HelpTextColor}" FontSize="26.667" Style="{StaticResource ExpanderViewStyle1}" Grid.Column="1" Margin="0,30,0,0" VerticalAlignment="Top">
+								Foreground="{StaticResource HelpTextColor}" FontSize="26.667" Style="{StaticResource ExpanderViewStyle1}" 
+                                                  Grid.Column="1" Margin="0,10,10,0" VerticalAlignment="Top">
 								<Line Stretch="Fill" StrokeThickness="3" X1="0" X2="1" Y1="0" Height="1" Fill="Black" Stroke="Black" Opacity="0.9" Margin="0,0,-107,0"/>
 								<TextBlock FontSize="26.667" Text="Default mode - No light in DISCOROBO’s hands: DISCOROBO will dance to the beats" TextWrapping="Wrap" Foreground="{StaticResource HelpTextColor}"/>
 								<Line Stretch="Fill" StrokeThickness="3" X1="0" X2="1" Y1="0" Height="1" Fill="Black" Stroke="Black" Opacity="0.9" Margin="0,0,-107,0"/>
@@ -357,6 +360,14 @@
 								<Line Stretch="Fill" StrokeThickness="3" X1="0" X2="1" Y1="0" Height="1" Fill="Black" Stroke="Black" Opacity="0.9" Margin="0,0,-107,0"/>
 								<TextBlock FontSize="26.667" Text="Mode 3 – DISCOROBO’s hands flash continuously: Continuous movement with a single swipe / shake" TextWrapping="Wrap" Foreground="{StaticResource HelpTextColor}"/>
 							</toolkit:ExpanderView>
+                            <Image x:Name="IndicatorImage" Source="/UIComponent/ic_indicator_ext.png" Stretch="Fill" 
+                                   Width="32" Height="32" Grid.Row="0" VerticalAlignment="Top" Margin="349,23,3,0" 
+                                   Grid.Column="1" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"
+                                   MouseLeftButtonDown="IndicatorImage_MouseLeftButtonDown">
+                            	<Image.RenderTransform>
+                            		<CompositeTransform Rotation="-90"/>
+                            	</Image.RenderTransform>
+                            </Image>
 							<Image Margin="0,22.5,0,0" Source="/UIComponent/New/ic_switch_mode_nor.png" Stretch="Fill" Width="74" Height="55" VerticalAlignment="Top"/>
 						</Grid>
 						<Line Stretch="Fill" StrokeThickness="3" X1="0" X2="1" Y1="0" Height="1" Fill="Black" Stroke="Black" Opacity="0.9"/>

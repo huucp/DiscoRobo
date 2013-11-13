@@ -52,7 +52,7 @@ namespace DiscoRoboOfficial
         private const string RecordIcon = "UIComponent/New/ic_record_nor.png";
         private const string StopRecordIcon = "UIComponent/New/ic_record_press.png";
 
-        private const string PlayMusicIcon = "/UIComponent/New/ic_browse_nor.png";
+        private const string PlayMusicIcon = "UIComponent/ic_load_music_nor.png";
 
         private bool UseCamera = false;
         private bool UseAccelerometer = false;
