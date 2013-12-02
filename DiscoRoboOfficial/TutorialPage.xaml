@@ -170,50 +170,84 @@
 			</Border.Background>
 			<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="SKIP" FontFamily="/Fonts/BRITANIC.TTF#Britannic Bold" FontSize="26.667"/>
 		</Border>
-		<Border x:Name="Step1Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,32,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 1:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press DiscoRobo’s belly button to activate it" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
-				<Image Grid.Column="2" Margin="0" Source="/UIComponent/ic_turn_off.png" Stretch="Fill" Width="83" Height="115"/>                
+		<ScrollViewer x:Name="ContentContainer" Margin="0" Grid.Row="1">
+			<Grid Height="998">
+				<Border x:Name="Step1Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,32,8,0" CornerRadius="6" VerticalAlignment="Top">
+					<Grid Margin="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="2*"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 1:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+						<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press DiscoRobo’s belly button to activate it" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+						<Image Grid.Column="2" Margin="0" Source="/UIComponent/ic_turn_off.png" Stretch="Fill" Width="83" Height="115"/>                
+					</Grid>
+				</Border>
+				<Rectangle x:Name="Arrow1" HorizontalAlignment="Center" Height="33" Margin="227,188,226,0" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+					<Rectangle.Fill>
+						<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+					</Rectangle.Fill>
+				</Rectangle>
+				<Border x:Name="Step2Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,223,8,0" CornerRadius="6" VerticalAlignment="Top">
+					<Grid Margin="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="2*"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 2:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+						<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press this button until both robot's hands light up" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+						<Image Grid.Column="2" Margin="0" Source="/UIComponent/New/ic_switch_mode_nor.png" Stretch="Fill" Width="77" Height="59" HorizontalAlignment="Center" VerticalAlignment="Center" MouseLeftButtonDown="ChangeMode_OnMouseLeftButtonDown"/>
+					</Grid>
+				</Border>
+				<Rectangle x:Name="Arrow2" HorizontalAlignment="Center" Height="33" Margin="227,379,226,0" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+					<Rectangle.Fill>
+						<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+					</Rectangle.Fill>
+				</Rectangle>
+				<Border x:Name="Step3Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,414,8,0" CornerRadius="6" VerticalAlignment="Top">
+					<Grid Margin="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="3*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 3:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+						<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Swipe / shake to control DISCOROBO" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+					</Grid>
+				</Border>
+				<Rectangle x:Name="Arrow3" HorizontalAlignment="Center" Height="33" Margin="227,570,226,-17" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+					<Rectangle.Fill>
+						<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+					</Rectangle.Fill>
+				</Rectangle>
+				<Border x:Name="Step4Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,605,8,-175" CornerRadius="6" VerticalAlignment="Top">
+					<Grid Margin="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="3*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 4:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+						<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Double tap on DISCOROBO to chat with him" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+					</Grid>
+				</Border>
+				<Rectangle x:Name="Arrow4" HorizontalAlignment="Center" Height="33" Margin="227,760,226,0" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
+					<Rectangle.Fill>
+						<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
+					</Rectangle.Fill>
+				</Rectangle>
+				<Border x:Name="Step5Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,795,8,0" CornerRadius="6" VerticalAlignment="Top">
+					<Grid Margin="0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="3*"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 5:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
+						<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Pinch to make DISCOROBO perform random dance" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
+					</Grid>
+				</Border>
 			</Grid>
-		</Border>
-		<Rectangle x:Name="Arrow1" HorizontalAlignment="Center" Height="33" Margin="0,188,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
-			<Rectangle.Fill>
-				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Border x:Name="Step2Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,223,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 2:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Press this button until both robot's hands light up" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
-				<Image Grid.Column="2" Margin="0" Source="/UIComponent/New/ic_switch_mode_nor.png" Stretch="Fill" Width="77" Height="59" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-		</Border>
-		<Rectangle x:Name="Arrow2" HorizontalAlignment="Center" Height="33" Margin="226.5,379,226.5,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="27" StrokeThickness="0">
-			<Rectangle.Fill>
-				<ImageBrush Stretch="Fill" ImageSource="/UIComponent/down_arrow.png"/>
-			</Rectangle.Fill>
-		</Rectangle>
-		<Border x:Name="Step3Border" BorderBrush="#FF493392" BorderThickness="4" Height="156" Margin="8,414,8,0" Grid.Row="1" CornerRadius="6" VerticalAlignment="Top">
-			<Grid Margin="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="3*"/>
-				</Grid.ColumnDefinitions>
-				<TextBlock Margin="10,15,0,0" TextWrapping="Wrap" Text="STEP 3:" Foreground="{StaticResource HelpTextColor}" FontWeight="Bold" VerticalAlignment="Top" FontSize="25.333"/>
-				<TextBlock Grid.Column="1" Margin="10,15,10,0" TextWrapping="Wrap" Text="Swipe / shake to control DISCOROBO" VerticalAlignment="Top" Foreground="{StaticResource HelpTextColor}" FontSize="25.333"/>
-			</Grid>
-		</Border>        
+		</ScrollViewer>        
 	</Grid>
 
 </phone:PhoneApplicationPage>

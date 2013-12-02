@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{234669a4-e9b2-4838-ae71-b37ac6876db2}" Title="Disco Robo" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal" Author="TOSY ROBOTICS JSC" Description="IMPORTANT: You must owned a Disco Robo, a dancing robot of Tosy Robotics JSC&#xD;&#xA;Tool to control Disco Robo by using  Windows Phone device.&#xD;&#xA;Support flick gesture and shake to remote.&#xD;&#xA;WHAT'S NEW?&#xD;&#xA;- Select background music from local&#xD;&#xA;- New tutorial" Publisher="TOSY ROBOTICS JSC" BitsPerPixel="32">
+  <App xmlns="" ProductID="{234669a4-e9b2-4838-ae71-b37ac6876db2}" Title="Disco Robo Chat" RuntimeType="Silverlight" Version="2.0.0.1" Genre="apps.normal" Author="TOSY ROBOTICS JSC" Description="DISCOROBO Chat is the specialized app for the latest version of DISCOROBO with Talking features. This app will allow you to customize DISCOROBO’s dancing steps and also to chat with it" Publisher="TOSY ROBOTICS JSC" BitsPerPixel="32">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_MEDIALIB" />

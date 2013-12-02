@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -10,6 +11,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace DiscoRoboOfficial
 {
@@ -60,5 +63,15 @@ namespace DiscoRoboOfficial
                 ImageSource = new BitmapImage(uriImage)
             };
         }
+
+        private void ChangeMode_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Stream stream = TitleContainer.OpenStream("Audio/ChangeMode.wav");
+            SoundEffect effect = SoundEffect.FromStream(stream);
+            FrameworkDispatcher.Update();
+            effect.Play();
+            stream.Close();
+        }
+        
     }
 }

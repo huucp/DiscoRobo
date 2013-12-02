@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("DiscoRoboOfficial")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Tosy Robotics JSC")]
 [assembly: AssemblyProduct("DiscoRoboOfficial")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

@@ -68,17 +68,53 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppSettings.cs" />
+<<<<<<< HEAD
     <Compile Include="CategoryKeyword.cs" />
+=======
+    <Compile Include="AppSettings.cs" />
     <Compile Include="HelpPage.xaml.cs">
       <DependentUpon>HelpPage.xaml</DependentUpon>
     </Compile>
+>>>>>>> master
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TutorialPage.xaml.cs">
       <DependentUpon>TutorialPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial10.xaml.cs">
+      <DependentUpon>Tutorial10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial11.xaml.cs">
+      <DependentUpon>Tutorial11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial3.xaml.cs">
+      <DependentUpon>Tutorial3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial1.xaml.cs">
+      <DependentUpon>Tutorial1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial2.xaml.cs">
+      <DependentUpon>Tutorial2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial4.xaml.cs">
+      <DependentUpon>Tutorial4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial5.xaml.cs">
+      <DependentUpon>Tutorial5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial6.xaml.cs">
+      <DependentUpon>Tutorial6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial7.xaml.cs">
+      <DependentUpon>Tutorial7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial8.xaml.cs">
+      <DependentUpon>Tutorial8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tutorial\Tutorial9.xaml.cs">
+      <DependentUpon>Tutorial9.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +133,50 @@
     <Page Include="TutorialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorial\Tutorial10.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial11.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial3.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutorial\Tutorial2.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial4.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial5.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial6.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial7.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial8.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tutorial\Tutorial9.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -127,32 +207,71 @@
     <Content Include="Audio\800.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Audio\category 1.wav" />
-    <Content Include="Audio\category 10.wav" />
-    <Content Include="Audio\category 11.wav" />
-    <Content Include="Audio\category 12.wav" />
-    <Content Include="Audio\category 13.wav" />
-    <Content Include="Audio\category 14.wav" />
-    <Content Include="Audio\category 15.wav" />
-    <Content Include="Audio\category 16.wav" />
-    <Content Include="Audio\category 2.wav" />
-    <Content Include="Audio\category 3.wav" />
-    <Content Include="Audio\category 4.wav" />
-    <Content Include="Audio\category 5.wav" />
-    <Content Include="Audio\category 6.wav" />
-    <Content Include="Audio\category 7.wav" />
-    <Content Include="Audio\category 8.wav" />
-    <Content Include="Audio\category 9.wav" />
+    <Content Include="Audio\category 1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 10.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 11.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 12.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 13.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 14.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 15.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 16.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 4.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 5.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 6.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 7.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 8.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Audio\category 9.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Audio\ChangeMode.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="categories.txt" />
+<<<<<<< HEAD
+    <Content Include="categories.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ic_launcher.png" />
+=======
+>>>>>>> master
     <Content Include="README_FIRST.txt" />
     <Content Include="robo_bg.png" />
     <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Tam Biet Nhe 2013 - Lynk Lee Phuc Bang.mp3" />
     <Content Include="Toolkit.Content\ApplicationBar.Add.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

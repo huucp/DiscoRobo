@@ -16,6 +16,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace DiscoRoboOfficial
 {
@@ -29,8 +30,25 @@ namespace DiscoRoboOfficial
         private const string ShakeSound = "Audio/1200.wav";
         private const string BowSound = "Audio/1100.wav";
         private const string MoveFootSound = "Audio/1500.wav";
-        // private const string ChangeLEDSound = "Audio/1000.wav"; // Rerve
+        // private const string ChangeLEDSound = "Audio/1000.wav"; // Reserve
         private const string ChangeSpeedSound = "Audio/800.wav";
+
+        private const string GreetingSound = "Audio/category 1.wav";
+        private const string FeelingSound = "Audio/category 2.wav";
+        private const string EncouragementSound = "Audio/category 3.wav";
+        private const string ActivitiesAnswerSound = "Audio/category 4.wav";
+        private const string ActivitiesYesNoSound = "Audio/category 5.wav";
+        private const string LoveAndFriendshipSound = "Audio/category 6.wav";
+        private const string DirtyWordsSound = "Audio/category 7.wav";
+        private const string UnknownSound = "Audio/category 8.wav";
+        private const string FoodAndDrinksSound = "Audio/category 9.wav";
+        private const string YesNoSound = "Audio/category 10.wav";
+        private const string PopularPlacesSound = "Audio/category 11.wav";
+        private const string SelfIntroductionSound = "Audio/category 12.wav";
+        private const string CartoonSound = "Audio/category 13.wav";
+        private const string CelebritiesSound = "Audio/category 14.wav";
+        private const string AnimalsSound = "Audio/category 15.wav";
+        private const string RandomSound = "Audio/category 16.wav";
 
         private const string D1Image = "/UIComponent/New/d1.png";
         private const string D2Image = "/UIComponent/New/d2.png";
@@ -92,6 +110,8 @@ namespace DiscoRoboOfficial
         {
             D1, D2, D3, D4, D5, D6, D7, D8
         }
+
+        public List<Keyword> ChatKeywords = new List<Keyword>();
         #endregion
 
         // Constructor
@@ -149,6 +169,12 @@ namespace DiscoRoboOfficial
                 e.Cancel = true;
                 return;
             }
+            if (ChatPopup.IsOpen)
+            {
+                ChatPopup.IsOpen = false;
+                e.Cancel = true;
+                return;
+            }
             if (NavigationService.CanGoBack)
             {
                 while (NavigationService.RemoveBackEntry() != null)
@@ -175,6 +201,11 @@ namespace DiscoRoboOfficial
             }
             ReplayTimer.Tick += ReplayTimer_Tick;
             if (MediaPlayer.State == MediaState.Paused) MediaPlayer.Resume();
+
+            if (ChatKeywords.Count == 0)
+            {
+                ChatKeywords = Keyword.LoadKeywordsFromFile("categories.txt");
+            }
         }
 
         private void Accelerometer_ReadingChanged(object sender, AccelerometerReadingEventArgs e)
@@ -201,10 +232,16 @@ namespace DiscoRoboOfficial
             }
         }
 
-        private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
+        private void GestureListener_OnPinchCompleted(object sender, PinchGestureEventArgs e)
         {
             if (UseAccelerometer || LoadPopup.IsOpen || SavePopup.IsOpen || HelpPopup.IsOpen
-                || MusicPopup.IsOpen) return;
+                || MusicPopup.IsOpen || ChatPopup.IsOpen) return;
+            PlayChatSound("random");
+        }
+        private void GestureListener_OnFlick(object sender, FlickGestureEventArgs e)
+        {
+            if (UseAccelerometer || LoadPopup.IsOpen || SavePopup.IsOpen || HelpPopup.IsOpen
+                || MusicPopup.IsOpen || ChatPopup.IsOpen) return;
             if (Math.Abs(e.HorizontalVelocity - 0) > 0.001 &&
                 e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
@@ -811,6 +848,88 @@ namespace DiscoRoboOfficial
                                   {
                                       ImageSource = new BitmapImage(uri)
                                   };
+        }
+
+        private void PlayChatSound(string category)
+        {
+            switch (category.ToLower())
+            {
+                case "greeting":
+                    PlaySound(GreetingSound);
+                    break;
+                case "feeling":
+                    PlaySound(FeelingSound);
+                    break;
+                case "encouragement":
+                    PlaySound(EncouragementSound);
+                    break;
+                case "activities answer":
+                    PlaySound(ActivitiesAnswerSound);
+                    break;
+                case "activities yes / no":
+                    PlaySound(ActivitiesYesNoSound);
+                    break;
+                case "love and friendship and compliments":
+                    PlaySound(LoveAndFriendshipSound);
+                    break;
+                case "bad words":
+                    PlaySound(DirtyWordsSound);
+                    break;
+                case "food and drinks":
+                    PlaySound(FoodAndDrinksSound);
+                    break;
+                case "yes/no":
+                    PlaySound(YesNoSound);
+                    break;
+                case "popular places":
+                    PlaySound(PopularPlacesSound);
+                    break;
+                case "self introduction":
+                    PlaySound(SelfIntroductionSound);
+                    break;
+                case "cartoon":
+                    PlaySound(CartoonSound);
+                    break;
+                case "celebrities":
+                    PlaySound(CelebritiesSound);
+                    break;
+                case "animals":
+                    PlaySound(AnimalsSound);
+                    break;
+                case "random":
+                    PlaySound(RandomSound);
+                    break;
+                default:
+                    PlaySound(UnknownSound);
+                    break;
+            }
+        }
+
+        private void ImageCanvas_OnDoubleTap(object sender, GestureEventArgs e)
+        {
+            ChatPopup.IsOpen = true;
+            ChatTextBox.Focus();
+        }
+
+        private void TalkButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            string chat = ChatTextBox.Text.ToLower();
+            if (string.IsNullOrWhiteSpace(chat)) return;
+            foreach (var keyword in ChatKeywords)
+            {
+                if (chat.Contains(keyword.Word))
+                {
+                    PlayChatSound(keyword.Category);
+                    return;
+                }
+            }
+            PlayChatSound("Unknown");
+        }
+
+        private void LayoutRoot_OnDoubleTap(object sender, Microsoft.Phone.Controls.GestureEventArgs e)
+        {
+            ChatPopup.IsOpen = true;
+            ChatTextBox.Focus();
         }
     }
 }
